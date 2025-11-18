@@ -18,7 +18,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://www.facebook.com" 
+                href="https://www.facebook.com/share/1KYKFawoWh/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-secondary transition-colors"
@@ -47,7 +47,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a 
-                href="https://www.linkedin.com" 
+                href="http://www.linkedin.com/in/edsec-innovations-848417392" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-secondary transition-colors"
@@ -138,10 +138,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 flex-shrink-0" />
-                <div className="opacity-90">
-                  <p>8660132700</p>
-                  <p>9742848595 / 9353743485</p>
-                </div>
+                <p className="opacity-90">8660132700</p>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 flex-shrink-0" />
