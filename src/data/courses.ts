@@ -1,0 +1,138 @@
+export interface Course {
+  id: string;
+  title: string;
+  duration: string;
+  type: string;
+  description: string;
+  features: string[];
+  category: 'main' | 'value-added';
+  detailedDescription?: string;
+}
+
+export const courses: Course[] = [
+  {
+    id: 'data-science',
+    title: 'Data Science',
+    duration: '3-6 Months',
+    type: 'Certified Internship',
+    description: 'Master machine learning, data visualization, and statistical analysis with real-world data projects.',
+    features: [
+      'Machine Learning',
+      'Data Visualization',
+      'Statistics',
+      'Real-World Data Project'
+    ],
+    category: 'main',
+    detailedDescription: 'Dive deep into the world of data science with our comprehensive internship program. Learn Python, machine learning algorithms, data visualization techniques, and statistical analysis. Work on real-world datasets and complete a capstone project that demonstrates your skills to potential employers.'
+  },
+  {
+    id: 'data-analytics',
+    title: 'Data Analytics',
+    duration: '3-6 Months',
+    type: 'Certified Internship',
+    description: 'Transform raw data into actionable insights using Excel, Power BI, SQL, and business intelligence tools.',
+    features: [
+      'Excel Advanced',
+      'Power BI',
+      'SQL',
+      'Business Dashboarding',
+      'Real Data Insights Project'
+    ],
+    category: 'main',
+    detailedDescription: 'Become a data analytics expert through hands-on training in Excel, Power BI, SQL, and business intelligence. Learn to create stunning dashboards, perform complex data analysis, and communicate insights effectively. Complete real business case studies and build a professional portfolio.'
+  },
+  {
+    id: 'python-sql',
+    title: 'Python Programming with SQL',
+    duration: '3-6 Months',
+    type: 'Certified Internship',
+    description: 'Build powerful applications by combining Python programming with database management using SQL.',
+    features: [
+      'Python Basics to Advanced',
+      'SQL Integration',
+      'API Handling',
+      'Mini Project'
+    ],
+    category: 'main',
+    detailedDescription: 'Master Python programming from basics to advanced concepts and integrate it with SQL for powerful data manipulation. Learn to build APIs, work with databases, and develop complete applications. Includes hands-on projects and real-world problem-solving.'
+  },
+  {
+    id: 'full-stack',
+    title: 'Full Stack Development',
+    duration: '4-6 Months',
+    type: 'Certified Internship',
+    description: 'Become a complete web developer with frontend and backend skills, ready to build production applications.',
+    features: [
+      'HTML, CSS, JavaScript',
+      'React Framework',
+      'Django Backend',
+      'Database Management',
+      'Cloud Hosting',
+      'Capstone Full-Stack Project'
+    ],
+    category: 'main',
+    detailedDescription: 'Comprehensive full-stack development training covering both frontend and backend technologies. Learn React for dynamic user interfaces, Django for robust backends, database design, and cloud deployment. Build multiple projects including a complete full-stack application.'
+  },
+  {
+    id: 'web-development',
+    title: 'Web Development',
+    duration: '6 Months',
+    type: 'Certified Internship',
+    description: 'Create stunning, responsive websites from scratch with modern frontend technologies.',
+    features: [
+      'Frontend Design',
+      'Responsive Layouts',
+      'Hosting Basics',
+      'Portfolio Project'
+    ],
+    category: 'main',
+    detailedDescription: 'Learn professional web development from the ground up. Master HTML, CSS, JavaScript, and modern design principles. Create responsive, mobile-friendly websites and deploy them to the web. Build a stunning portfolio to showcase your work.'
+  },
+  {
+    id: 'python-basics',
+    title: 'Basics of Python Programming',
+    duration: '1 Month',
+    type: 'Value Added Course',
+    description: 'Quick start guide to Python programming fundamentals for beginners.',
+    features: [
+      'Introduction to Python & installation',
+      'Variables & Data Types',
+      'Input/Output operations',
+      'Type casting',
+      'Comments & indentation',
+      'Operators (Arithmetic, Comparison, Logical, Assignment, Bitwise)'
+    ],
+    category: 'value-added',
+    detailedDescription: 'Perfect introduction to Python for absolute beginners. Learn programming fundamentals, write your first programs, and understand core Python concepts in just one month.'
+  },
+  {
+    id: 'augmented-reality',
+    title: 'Augmented Reality',
+    duration: '1 Month',
+    type: 'Value Added Course',
+    description: 'Explore AR technology and create immersive experiences with 3D object interactions.',
+    features: [
+      'Create 3D object interactions',
+      'Track surfaces, images, faces',
+      'Improve performance of AR apps',
+      'Integrate animations & UI'
+    ],
+    category: 'value-added',
+    detailedDescription: 'Step into the future with Augmented Reality development. Learn to create interactive AR experiences, track real-world objects, and build engaging applications that blend digital content with the physical world.'
+  },
+  {
+    id: 'sql-language',
+    title: 'SQL Language',
+    duration: '1 Month',
+    type: 'Value Added Course',
+    description: 'Master database management and SQL queries for efficient data manipulation.',
+    features: [
+      'Database fundamentals',
+      'SQL queries and operations',
+      'Data manipulation',
+      'Database design'
+    ],
+    category: 'value-added',
+    detailedDescription: 'Learn SQL from scratch and become proficient in database management. Master queries, joins, aggregations, and database design. Essential skill for any developer or data professional.'
+  }
+];
