@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import logo from '@/assets/edsec-logo.png';
 
 const Footer = () => {
   return (
@@ -8,7 +9,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About Company */}
           <div>
-            <h3 className="text-lg font-bold mb-4">About Edsec Innovations</h3>
+            <div className="flex items-center space-x-2 mb-4">
+              <img src={logo} alt="Edsec Innovations Logo" className="w-8 h-8 object-contain" />
+              <h3 className="text-lg font-bold">Edsec Innovations</h3>
+            </div>
             <p className="text-sm opacity-90 mb-4">
               MSME certified training institute empowering students through certified internships and real-world projects. Building careers through hands-on learning and industry mentorship.
             </p>
