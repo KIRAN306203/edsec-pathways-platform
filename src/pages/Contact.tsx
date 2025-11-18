@@ -169,8 +169,7 @@ const Contact = () => {
                     <div>
                       <h3 className="font-bold text-lg mb-2">Phone</h3>
                       <p className="text-muted-foreground">
-                        Main: <a href="tel:8660132700" className="hover:text-primary">8660132700</a><br />
-                        Details: <a href="tel:9742848595" className="hover:text-primary">9742848595</a> / <a href="tel:9353743485" className="hover:text-primary">9353743485</a>
+                        <a href="tel:8660132700" className="hover:text-primary">8660132700</a>
                       </p>
                     </div>
                   </div>

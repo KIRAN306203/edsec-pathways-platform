@@ -100,10 +100,7 @@ const About = () => {
                   
                   <div>
                     <h3 className="font-bold mb-2">Phone</h3>
-                    <p className="text-muted-foreground">
-                      Main: 8660132700<br />
-                      For Details: 9742848595 / 9353743485
-                    </p>
+                    <p className="text-muted-foreground">8660132700</p>
                   </div>
                   
                   <div>
