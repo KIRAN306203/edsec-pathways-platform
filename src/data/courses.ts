@@ -23,7 +23,7 @@ export const courses: Course[] = [
   {
     id: 'data-science',
     title: 'Data Science',
-    duration: '3-6 Months',
+    duration: '4-6 Months',
     type: 'Certified Internship',
     description: 'Master machine learning, data visualization, and statistical analysis with real-world data projects.',
     features: [
@@ -39,7 +39,7 @@ export const courses: Course[] = [
   {
     id: 'data-analytics',
     title: 'Data Analytics',
-    duration: '3-6 Months',
+    duration: '4-6 Months',
     type: 'Certified Internship',
     description: 'Transform raw data into actionable insights using Excel, Power BI, SQL, and business intelligence tools.',
     features: [
@@ -56,7 +56,7 @@ export const courses: Course[] = [
   {
     id: 'python-sql',
     title: 'Python Programming with SQL',
-    duration: '3-6 Months',
+    duration: '4-6 Months',
     type: 'Certified Internship',
     description: 'Build powerful applications by combining Python programming with database management using SQL.',
     features: [
