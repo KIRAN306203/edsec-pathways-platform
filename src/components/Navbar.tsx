@@ -39,9 +39,9 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link to="/courses">
+            <Link to="/internship">
               <Button className="bg-gradient-primary hover:opacity-90">
-                Explore Courses
+                Internship Programs
               </Button>
             </Link>
           </div>
@@ -71,9 +71,9 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link to="/courses" onClick={() => setIsOpen(false)}>
+            <Link to="/internship" onClick={() => setIsOpen(false)}>
               <Button className="w-full bg-gradient-primary hover:opacity-90">
-                Explore Courses
+                Internship Programs
               </Button>
             </Link>
           </div>

@@ -56,9 +56,9 @@ const Index = () => {
               Join India's leading MSME certified training institute for hands-on learning and career transformation
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/courses">
+              <Link to="/internship">
                 <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                  Explore Courses
+                  Internship Programs
                 </Button>
               </Link>
               <Link to="/contact">
@@ -94,9 +94,9 @@ const Index = () => {
           )}
 
           <div className="text-center mt-12">
-            <Link to="/courses">
+            <Link to="/internship">
               <Button size="lg" className="bg-gradient-primary hover:opacity-90">
-                View All Courses
+                View Internship Programs
               </Button>
             </Link>
           </div>
