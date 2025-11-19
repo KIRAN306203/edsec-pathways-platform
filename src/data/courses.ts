@@ -1,3 +1,12 @@
+import dataScience from '@/assets/courses/data-science.jpg';
+import dataAnalytics from '@/assets/courses/data-analytics.jpg';
+import pythonSql from '@/assets/courses/python-sql.jpg';
+import fullStack from '@/assets/courses/full-stack.jpg';
+import webDev from '@/assets/courses/web-development.jpg';
+import pythonBasics from '@/assets/courses/python-basics.jpg';
+import msOffice from '@/assets/courses/ms-office.jpg';
+import digitalMarketing from '@/assets/courses/digital-marketing.jpg';
+
 export interface Course {
   id: string;
   title: string;
@@ -7,6 +16,7 @@ export interface Course {
   features: string[];
   category: 'main' | 'value-added';
   detailedDescription?: string;
+  image: string;
 }
 
 export const courses: Course[] = [
@@ -23,7 +33,8 @@ export const courses: Course[] = [
       'Real-World Data Project'
     ],
     category: 'main',
-    detailedDescription: 'Dive deep into the world of data science with our comprehensive internship program. Learn Python, machine learning algorithms, data visualization techniques, and statistical analysis. Work on real-world datasets and complete a capstone project that demonstrates your skills to potential employers.'
+    detailedDescription: 'Dive deep into the world of data science with our comprehensive internship program. Learn Python, machine learning algorithms, data visualization techniques, and statistical analysis. Work on real-world datasets and complete a capstone project that demonstrates your skills to potential employers.',
+    image: dataScience
   },
   {
     id: 'data-analytics',
@@ -39,7 +50,8 @@ export const courses: Course[] = [
       'Real Data Insights Project'
     ],
     category: 'main',
-    detailedDescription: 'Become a data analytics expert through hands-on training in Excel, Power BI, SQL, and business intelligence. Learn to create stunning dashboards, perform complex data analysis, and communicate insights effectively. Complete real business case studies and build a professional portfolio.'
+    detailedDescription: 'Become a data analytics expert through hands-on training in Excel, Power BI, SQL, and business intelligence. Learn to create stunning dashboards, perform complex data analysis, and communicate insights effectively. Complete real business case studies and build a professional portfolio.',
+    image: dataAnalytics
   },
   {
     id: 'python-sql',
@@ -54,7 +66,8 @@ export const courses: Course[] = [
       'Mini Project'
     ],
     category: 'main',
-    detailedDescription: 'Master Python programming from basics to advanced concepts and integrate it with SQL for powerful data manipulation. Learn to build APIs, work with databases, and develop complete applications. Includes hands-on projects and real-world problem-solving.'
+    detailedDescription: 'Master Python programming from basics to advanced concepts and integrate it with SQL for powerful data manipulation. Learn to build APIs, work with databases, and develop complete applications. Includes hands-on projects and real-world problem-solving.',
+    image: pythonSql
   },
   {
     id: 'full-stack',
@@ -71,7 +84,8 @@ export const courses: Course[] = [
       'Capstone Full-Stack Project'
     ],
     category: 'main',
-    detailedDescription: 'Comprehensive full-stack development training covering both frontend and backend technologies. Learn React for dynamic user interfaces, Django for robust backends, database design, and cloud deployment. Build multiple projects including a complete full-stack application.'
+    detailedDescription: 'Comprehensive full-stack development training covering both frontend and backend technologies. Learn React for dynamic user interfaces, Django for robust backends, database design, and cloud deployment. Build multiple projects including a complete full-stack application.',
+    image: fullStack
   },
   {
     id: 'web-development',
@@ -86,7 +100,8 @@ export const courses: Course[] = [
       'Portfolio Project'
     ],
     category: 'main',
-    detailedDescription: 'Learn professional web development from the ground up. Master HTML, CSS, JavaScript, and modern design principles. Create responsive, mobile-friendly websites and deploy them to the web. Build a stunning portfolio to showcase your work.'
+    detailedDescription: 'Learn professional web development from the ground up. Master HTML, CSS, JavaScript, and modern design principles. Create responsive, mobile-friendly websites and deploy them to the web. Build a stunning portfolio to showcase your work.',
+    image: webDev
   },
   {
     id: 'python-basics',
@@ -103,7 +118,8 @@ export const courses: Course[] = [
       'Operators (Arithmetic, Comparison, Logical, Assignment, Bitwise)'
     ],
     category: 'value-added',
-    detailedDescription: 'Perfect introduction to Python for absolute beginners. Learn programming fundamentals, write your first programs, and understand core Python concepts in just one month.'
+    detailedDescription: 'Perfect introduction to Python for absolute beginners. Learn programming fundamentals, write your first programs, and understand core Python concepts in just one month.',
+    image: pythonBasics
   },
   {
     id: 'augmented-reality',
@@ -118,7 +134,8 @@ export const courses: Course[] = [
       'Integrate animations & UI'
     ],
     category: 'value-added',
-    detailedDescription: 'Step into the future with Augmented Reality development. Learn to create interactive AR experiences, track real-world objects, and build engaging applications that blend digital content with the physical world.'
+    detailedDescription: 'Step into the future with Augmented Reality development. Learn to create interactive AR experiences, track real-world objects, and build engaging applications that blend digital content with the physical world.',
+    image: msOffice
   },
   {
     id: 'sql-language',
@@ -133,6 +150,7 @@ export const courses: Course[] = [
       'Database design'
     ],
     category: 'value-added',
-    detailedDescription: 'Learn SQL from scratch and become proficient in database management. Master queries, joins, aggregations, and database design. Essential skill for any developer or data professional.'
+    detailedDescription: 'Learn SQL from scratch and become proficient in database management. Master queries, joins, aggregations, and database design. Essential skill for any developer or data professional.',
+    image: digitalMarketing
   }
 ];

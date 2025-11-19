@@ -11,6 +11,13 @@ interface CourseCardProps {
 const CourseCard = ({ course }: CourseCardProps) => {
   return (
     <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+      <div className="relative h-48 overflow-hidden">
+        <img 
+          src={course.image} 
+          alt={course.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
       <CardHeader>
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center space-x-1 text-sm text-muted-foreground">
