@@ -59,12 +59,16 @@ const Internship = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-hero text-primary-foreground py-16 md:py-24">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gradient-hero text-primary-foreground py-16 md:py-24 overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-white rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-white rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in">
               Internship Programs
@@ -77,7 +81,7 @@ const Internship = () => {
       </section>
 
       {/* Internship Duration Selection */}
-      <section className="py-16">
+      <section className="py-16 bg-gradient-section">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -94,8 +98,8 @@ const Internship = () => {
               return (
                 <Card 
                   key={program.id}
-                  className={`relative p-8 hover:shadow-lg transition-all ${
-                    program.popular ? 'border-2 border-primary' : ''
+                  className={`relative p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-card border-none ${
+                    program.popular ? 'ring-2 ring-primary ring-offset-2' : ''
                   }`}
                 >
                   {program.popular && (
@@ -151,8 +155,9 @@ const Internship = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-4">
+      <section className="py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-muted opacity-80"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
               What Makes Our Internships Special?

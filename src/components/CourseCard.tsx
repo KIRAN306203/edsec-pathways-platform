@@ -10,12 +10,12 @@ interface CourseCardProps {
 
 const CourseCard = ({ course }: CourseCardProps) => {
   return (
-    <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      <div className="relative h-48 overflow-hidden">
+    <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-card border-none group">
+      <div className="relative h-48 overflow-hidden rounded-t-lg">
         <img 
           src={course.image} 
           alt={course.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
       </div>
       <CardHeader>
