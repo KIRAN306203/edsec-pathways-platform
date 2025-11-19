@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 220 20% 98%;
     --foreground: 220 13% 13%;
 
     --card: 0 0% 100%;
@@ -23,7 +23,7 @@ All colors MUST be HSL.
     --secondary: 263 70% 60%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 220 13% 95%;
+    --muted: 220 20% 96%;
     --muted-foreground: 220 9% 46%;
 
     --accent: 263 70% 60%;
@@ -40,6 +40,8 @@ All colors MUST be HSL.
 
     --gradient-primary: linear-gradient(135deg, hsl(220 85% 25%), hsl(263 70% 50%));
     --gradient-hero: linear-gradient(135deg, hsl(220 85% 25%) 0%, hsl(263 70% 60%) 100%);
+    --gradient-section: linear-gradient(180deg, hsl(220 20% 98%) 0%, hsl(263 30% 96%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(220 20% 99%) 100%);
   }
 }
 
@@ -50,5 +52,61 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: linear-gradient(180deg, hsl(220 20% 98%) 0%, hsl(263 20% 97%) 100%);
+    background-attachment: fixed;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    background-size: 1000px 100%;
+    animation: shimmer 3s infinite;
+  }
+
+  .bg-gradient-section {
+    background: var(--gradient-section);
+  }
+
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(white, white) padding-box,
+                var(--gradient-primary) border-box;
+    border: 2px solid transparent;
   }
 }
