@@ -5,7 +5,8 @@ import fullStack from '@/assets/courses/full-stack.jpg';
 import webDev from '@/assets/courses/web-development.jpg';
 import pythonBasics from '@/assets/courses/python-basics.jpg';
 import msOffice from '@/assets/courses/ms-office.jpg';
-import digitalMarketing from '@/assets/courses/digital-marketing.jpg';
+import digitalMarketingNew from '@/assets/courses/digital-marketing-new.jpg';
+import sqlLanguage from '@/assets/courses/sql-language.jpg';
 
 export interface Course {
   id: string;
@@ -151,6 +152,23 @@ export const courses: Course[] = [
     ],
     category: 'value-added',
     detailedDescription: 'Learn SQL from scratch and become proficient in database management. Master queries, joins, aggregations, and database design. Essential skill for any developer or data professional.',
-    image: digitalMarketing
+    image: sqlLanguage
+  },
+  {
+    id: 'digital-marketing',
+    title: 'Digital Marketing',
+    duration: '1 Month',
+    type: 'Value Added Course',
+    description: 'Learn social media marketing, SEO, email campaigns, and online advertising strategies.',
+    features: [
+      'Social Media Marketing',
+      'SEO Optimization',
+      'Email Marketing Campaigns',
+      'Google Ads & Facebook Ads',
+      'Analytics & Performance Tracking'
+    ],
+    category: 'value-added',
+    detailedDescription: 'Master the fundamentals of digital marketing in just one month. Learn to create effective social media campaigns, optimize content for search engines, run successful email marketing, and analyze campaign performance. Perfect for entrepreneurs and marketing enthusiasts.',
+    image: digitalMarketingNew
   }
 ];
