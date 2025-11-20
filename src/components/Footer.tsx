@@ -18,7 +18,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://www.facebook.com/share/1KYKFawoWh/" 
+                href="https://www.facebook.com/share/1Ckk8LXs8B/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-secondary transition-colors"
@@ -27,7 +27,7 @@ const Footer = () => {
                 <Facebook className="h-5 w-5" />
               </a>
               <a 
-                href="https://www.instagram.com/edsecinnovations" 
+                href="https://www.instagram.com/edsecinnovations?utm_source=qr&igsh=NGg3aGllbTV0bnBr" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-secondary transition-colors"
@@ -56,7 +56,7 @@ const Footer = () => {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a 
-                href="https://www.youtube.com" 
+                href="https://youtube.com/@edsecinnovations?si=gp8I6-gbmDJif6yb" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-secondary transition-colors"
