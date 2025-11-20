@@ -34,15 +34,18 @@ const Navbar = () => {
                 to={link.path}
               >
                 <Button
-                  variant={isActive(link.path) ? "default" : "ghost"}
-                  className={isActive(link.path) ? "bg-primary text-primary-foreground" : ""}
+                  className={`bg-gradient-primary hover:opacity-90 ${
+                    isActive(link.path) ? 'ring-2 ring-primary-foreground ring-offset-2' : ''
+                  }`}
                 >
                   {link.name}
                 </Button>
               </Link>
             ))}
             <Link to="/internship">
-              <Button className="bg-gradient-primary hover:opacity-90">
+              <Button className={`bg-gradient-primary hover:opacity-90 ${
+                isActive('/internship') ? 'ring-2 ring-primary-foreground ring-offset-2' : ''
+              }`}>
                 Internship Programs
               </Button>
             </Link>
@@ -68,15 +71,18 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
               >
                 <Button
-                  variant={isActive(link.path) ? "default" : "ghost"}
-                  className={`w-full justify-start ${isActive(link.path) ? "bg-primary text-primary-foreground" : ""}`}
+                  className={`w-full bg-gradient-primary hover:opacity-90 ${
+                    isActive(link.path) ? 'ring-2 ring-primary-foreground ring-offset-2' : ''
+                  }`}
                 >
                   {link.name}
                 </Button>
               </Link>
             ))}
             <Link to="/internship" onClick={() => setIsOpen(false)}>
-              <Button className="w-full bg-gradient-primary hover:opacity-90">
+              <Button className={`w-full bg-gradient-primary hover:opacity-90 ${
+                isActive('/internship') ? 'ring-2 ring-primary-foreground ring-offset-2' : ''
+              }`}>
                 Internship Programs
               </Button>
             </Link>
