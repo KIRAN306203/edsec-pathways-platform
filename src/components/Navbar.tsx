@@ -34,18 +34,22 @@ const Navbar = () => {
                 to={link.path}
               >
                 <Button
-                  className={`bg-gradient-primary hover:opacity-90 ${
-                    isActive(link.path) ? 'ring-2 ring-primary-foreground ring-offset-2' : ''
-                  }`}
+                  className={
+                    isActive(link.path) 
+                      ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
+                      : 'bg-gradient-primary hover:opacity-90'
+                  }
                 >
                   {link.name}
                 </Button>
               </Link>
             ))}
             <Link to="/internship">
-              <Button className={`bg-gradient-primary hover:opacity-90 ${
-                isActive('/internship') ? 'ring-2 ring-primary-foreground ring-offset-2' : ''
-              }`}>
+              <Button className={
+                isActive('/internship')
+                  ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                  : 'bg-gradient-primary hover:opacity-90'
+              }>
                 Internship Programs
               </Button>
             </Link>
@@ -71,8 +75,10 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
               >
                 <Button
-                  className={`w-full bg-gradient-primary hover:opacity-90 ${
-                    isActive(link.path) ? 'ring-2 ring-primary-foreground ring-offset-2' : ''
+                  className={`w-full ${
+                    isActive(link.path)
+                      ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                      : 'bg-gradient-primary hover:opacity-90'
                   }`}
                 >
                   {link.name}
@@ -80,8 +86,10 @@ const Navbar = () => {
               </Link>
             ))}
             <Link to="/internship" onClick={() => setIsOpen(false)}>
-              <Button className={`w-full bg-gradient-primary hover:opacity-90 ${
-                isActive('/internship') ? 'ring-2 ring-primary-foreground ring-offset-2' : ''
+              <Button className={`w-full ${
+                isActive('/internship')
+                  ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                  : 'bg-gradient-primary hover:opacity-90'
               }`}>
                 Internship Programs
               </Button>
