@@ -27,16 +27,18 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(link.path) ? 'text-primary' : 'text-muted-foreground'
-                }`}
               >
-                {link.name}
+                <Button
+                  variant={isActive(link.path) ? "default" : "ghost"}
+                  className={isActive(link.path) ? "bg-primary text-primary-foreground" : ""}
+                >
+                  {link.name}
+                </Button>
               </Link>
             ))}
             <Link to="/internship">
@@ -58,17 +60,19 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 space-y-4">
+          <div className="md:hidden py-4 space-y-2">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`block py-2 text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(link.path) ? 'text-primary' : 'text-muted-foreground'
-                }`}
                 onClick={() => setIsOpen(false)}
               >
-                {link.name}
+                <Button
+                  variant={isActive(link.path) ? "default" : "ghost"}
+                  className={`w-full justify-start ${isActive(link.path) ? "bg-primary text-primary-foreground" : ""}`}
+                >
+                  {link.name}
+                </Button>
               </Link>
             ))}
             <Link to="/internship" onClick={() => setIsOpen(false)}>
