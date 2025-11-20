@@ -36,8 +36,8 @@ const Navbar = () => {
                 <Button
                   className={
                     isActive(link.path) 
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                      : 'bg-gradient-primary hover:opacity-90'
+                      ? 'bg-[hsl(220,85%,20%)] text-white hover:bg-[hsl(220,85%,20%)]/90 shadow-lg' 
+                      : 'bg-gradient-primary text-white hover:opacity-90'
                   }
                 >
                   {link.name}
@@ -47,8 +47,8 @@ const Navbar = () => {
             <Link to="/internship">
               <Button className={
                 isActive('/internship')
-                  ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                  : 'bg-gradient-primary hover:opacity-90'
+                  ? 'bg-[hsl(220,85%,20%)] text-white hover:bg-[hsl(220,85%,20%)]/90 shadow-lg'
+                  : 'bg-gradient-primary text-white hover:opacity-90'
               }>
                 Internship Programs
               </Button>
@@ -77,8 +77,8 @@ const Navbar = () => {
                 <Button
                   className={`w-full ${
                     isActive(link.path)
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                      : 'bg-gradient-primary hover:opacity-90'
+                      ? 'bg-[hsl(220,85%,20%)] text-white hover:bg-[hsl(220,85%,20%)]/90 shadow-lg'
+                      : 'bg-gradient-primary text-white hover:opacity-90'
                   }`}
                 >
                   {link.name}
@@ -88,8 +88,8 @@ const Navbar = () => {
             <Link to="/internship" onClick={() => setIsOpen(false)}>
               <Button className={`w-full ${
                 isActive('/internship')
-                  ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                  : 'bg-gradient-primary hover:opacity-90'
+                  ? 'bg-[hsl(220,85%,20%)] text-white hover:bg-[hsl(220,85%,20%)]/90 shadow-lg'
+                  : 'bg-gradient-primary text-white hover:opacity-90'
               }`}>
                 Internship Programs
               </Button>
