@@ -23,9 +23,9 @@ const Courses = () => {
           </div>
 
           <Tabs defaultValue="main" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12 bg-white/60 backdrop-blur-sm">
-              <TabsTrigger value="main">Internship Programs</TabsTrigger>
-              <TabsTrigger value="value-added">Value Added Courses</TabsTrigger>
+            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-12 bg-white/60 backdrop-blur-sm p-1">
+              <TabsTrigger value="main" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Internship Programs</TabsTrigger>
+              <TabsTrigger value="value-added" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Value Added Courses</TabsTrigger>
             </TabsList>
 
             <TabsContent value="main" className="space-y-8 animate-fade-in">
