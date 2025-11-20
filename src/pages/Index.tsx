@@ -22,7 +22,7 @@ const Index = () => {
     'MSME Certified Institute',
     'Real-World Project Building',
     'Certified Internship Programs',
-    '1-Month (Value Added) and 3-6 Month Internship Options',
+    '1-Month (Value Added) and 4-6 Month Internship Options',
     'Hands-on Mentorship from Industry Experts'
   ];
 
