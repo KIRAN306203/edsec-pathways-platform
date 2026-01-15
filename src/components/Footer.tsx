@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
-import logo from '@/assets/edsec-logo.png';
+import logo from '@/assets/edsec-logo-new.jpg';
 
 const Footer = () => {
   return (
