@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { Clock, Award } from 'lucide-react';
+import { Clock, Award, Download } from 'lucide-react';
 import { Course } from '@/data/courses';
 
 interface CourseCardProps {
@@ -9,6 +9,30 @@ interface CourseCardProps {
 }
 
 const CourseCard = ({ course }: CourseCardProps) => {
+  const handleDownload = async () => {
+    if (!course.downloadImages || course.downloadImages.length === 0) {
+      return;
+    }
+
+    // Download each image for this specific course
+    for (const image of course.downloadImages) {
+      try {
+        const response = await fetch(image.url);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = image.filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error('Download failed:', error);
+      }
+    }
+  };
+
   return (
     <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-gradient-card border-none group">
       <div className="relative h-48 overflow-hidden rounded-t-lg">
@@ -45,12 +69,23 @@ const CourseCard = ({ course }: CourseCardProps) => {
           </ul>
         </div>
       </CardContent>
-      <CardFooter>
-        <Link to={`/course/${course.id}`} className="w-full">
+      <CardFooter className="flex gap-2">
+        <Link to={`/course/${course.id}`} className="flex-1">
           <Button className="w-full bg-gradient-primary hover:opacity-90">
             View Details
           </Button>
         </Link>
+        {course.downloadImages && course.downloadImages.length > 0 && (
+          <Button 
+            variant="outline" 
+            size="icon"
+            onClick={handleDownload}
+            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            title="Download Brochure"
+          >
+            <Download className="h-4 w-4" />
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );
