@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from './ui/button';
 import { Clock, Award, Download } from 'lucide-react';
 import { Course } from '@/data/courses';
+import { downloadImages } from '@/services/api';
 
 interface CourseCardProps {
   course: Course;
@@ -13,23 +14,11 @@ const CourseCard = ({ course }: CourseCardProps) => {
     if (!course.downloadImages || course.downloadImages.length === 0) {
       return;
     }
-
-    // Download each image for this specific course
-    for (const image of course.downloadImages) {
-      try {
-        const response = await fetch(image.url);
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = image.filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      } catch (error) {
-        console.error('Download failed:', error);
-      }
+    
+    try {
+      await downloadImages(course.downloadImages);
+    } catch (error) {
+      console.error('Download failed:', error);
     }
   };
 
