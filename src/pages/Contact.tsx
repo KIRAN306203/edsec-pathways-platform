@@ -8,7 +8,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
-import { supabase } from '@/integrations/supabase/client';
+import { sendContactEmail, ContactFormData } from '@/services/api';
+import { validateEmail } from '@/utils';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -29,8 +30,7 @@ const Contact = () => {
     }
 
     // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
+    if (!validateEmail(formData.email)) {
       toast.error('Please enter a valid email address');
       return;
     }
@@ -38,11 +38,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData
-      });
-
-      if (error) throw error;
+      await sendContactEmail(formData);
 
       toast.success('Message sent successfully! We will get back to you soon.');
       
