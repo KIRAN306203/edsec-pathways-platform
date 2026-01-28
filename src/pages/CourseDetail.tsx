@@ -68,7 +68,7 @@ const CourseDetail = () => {
                     </div>
                   </div>
                 }>
-                  <SyllabusFlowchart3D courseTitle={course.title} features={course.features} />
+                  <SyllabusFlowchart3D courseTitle={course.title} features={course.features} courseId={course.id} />
                 </Suspense>
               </CardContent>
             </Card>
