@@ -1,8 +1,9 @@
-import { Suspense, useMemo } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Float, MeshDistortMaterial } from '@react-three/drei';
+import { Suspense, useMemo, useState, useCallback, useRef, useEffect } from 'react';
+import { Canvas, useThree, useFrame } from '@react-three/fiber';
+import { OrbitControls, PerspectiveCamera, Float, MeshDistortMaterial, Text } from '@react-three/drei';
 import FlowchartNode from './FlowchartNode';
 import FlowchartConnection from './FlowchartConnection';
+import { courseSyllabusDetails } from '@/data/syllabusDetails';
 import * as THREE from 'three';
 
 interface SyllabusFlowchart3DProps {
@@ -18,64 +19,69 @@ const themes = {
     nodeColors: ['#3b82f6', '#6366f1', '#8b5cf6', '#06b6d4', '#0ea5e9', '#14b8a6'],
     centerColor: '#1e40af',
     ambientLight: 0.3,
-    accentColor: '#60a5fa'
+    accentColor: '#60a5fa',
+    subNodeColor: '#1e3a5f'
   },
   nature: {
     background: 'from-emerald-900 via-teal-900 to-green-950',
     nodeColors: ['#10b981', '#14b8a6', '#22c55e', '#34d399', '#059669', '#0d9488'],
     centerColor: '#065f46',
     ambientLight: 0.4,
-    accentColor: '#6ee7b7'
+    accentColor: '#6ee7b7',
+    subNodeColor: '#134e4a'
   },
   gradient: {
     background: 'from-purple-900 via-violet-900 to-fuchsia-950',
     nodeColors: ['#a855f7', '#d946ef', '#c026d3', '#e879f9', '#f0abfc', '#c084fc'],
     centerColor: '#581c87',
     ambientLight: 0.35,
-    accentColor: '#e879f9'
+    accentColor: '#e879f9',
+    subNodeColor: '#4c1d95'
   },
   minimal: {
     background: 'from-gray-100 via-slate-100 to-gray-200',
     nodeColors: ['#374151', '#4b5563', '#6b7280', '#1f2937', '#111827', '#525252'],
     centerColor: '#0f172a',
     ambientLight: 0.6,
-    accentColor: '#94a3b8'
+    accentColor: '#94a3b8',
+    subNodeColor: '#334155'
   },
   warm: {
     background: 'from-orange-900 via-amber-900 to-red-950',
     nodeColors: ['#f97316', '#fb923c', '#f59e0b', '#ef4444', '#dc2626', '#ea580c'],
     centerColor: '#7c2d12',
     ambientLight: 0.4,
-    accentColor: '#fbbf24'
+    accentColor: '#fbbf24',
+    subNodeColor: '#7c2d12'
   }
 };
 
 // Floating decorative spheres
 const FloatingOrbs = ({ color }: { color: string }) => {
   const orbs = useMemo(() => {
-    return Array.from({ length: 8 }).map((_, i) => ({
+    return Array.from({ length: 6 }).map((_, i) => ({
       position: [
-        (Math.random() - 0.5) * 12,
-        (Math.random() - 0.5) * 8,
-        -3 - Math.random() * 5
+        (Math.random() - 0.5) * 14,
+        (Math.random() - 0.5) * 10,
+        -4 - Math.random() * 4
       ] as [number, number, number],
-      scale: 0.3 + Math.random() * 0.5,
-      speed: 0.5 + Math.random() * 1.5
+      scale: 0.3 + Math.random() * 0.4,
+      speed: 0.5 + Math.random() * 1
     }));
   }, []);
 
   return (
     <>
       {orbs.map((orb, i) => (
-        <Float key={i} speed={orb.speed} rotationIntensity={0.5} floatIntensity={1}>
+        <Float key={i} speed={orb.speed} rotationIntensity={0.3} floatIntensity={0.8}>
           <mesh position={orb.position} scale={orb.scale}>
-            <sphereGeometry args={[1, 32, 32]} />
+            <sphereGeometry args={[1, 24, 24]} />
             <MeshDistortMaterial
               color={color}
               transparent
-              opacity={0.15}
-              distort={0.3}
-              speed={2}
+              opacity={0.12}
+              distort={0.25}
+              speed={1.5}
             />
           </mesh>
         </Float>
@@ -87,20 +93,101 @@ const FloatingOrbs = ({ color }: { color: string }) => {
 // Grid floor for depth
 const GridFloor = ({ color }: { color: string }) => {
   return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -4, 0]}>
-      <planeGeometry args={[30, 30, 30, 30]} />
+    <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -5, 0]}>
+      <planeGeometry args={[40, 40, 40, 40]} />
       <meshBasicMaterial 
         color={color} 
         wireframe 
         transparent 
-        opacity={0.1}
+        opacity={0.08}
       />
     </mesh>
   );
 };
 
-const FlowchartScene = ({ courseTitle, features, theme = 'tech' }: SyllabusFlowchart3DProps) => {
+// Camera controller for smooth transitions
+const CameraController = ({ 
+  targetPosition, 
+  targetLookAt,
+  isZoomed 
+}: { 
+  targetPosition: [number, number, number];
+  targetLookAt: [number, number, number];
+  isZoomed: boolean;
+}) => {
+  const { camera } = useThree();
+  const currentLookAt = useRef(new THREE.Vector3(0, 0, 0));
+  
+  useFrame(() => {
+    // Smooth camera position transition
+    camera.position.lerp(new THREE.Vector3(...targetPosition), 0.05);
+    
+    // Smooth look-at transition
+    currentLookAt.current.lerp(new THREE.Vector3(...targetLookAt), 0.05);
+    camera.lookAt(currentLookAt.current);
+  });
+  
+  return null;
+};
+
+// Back button in 3D space
+const BackButton = ({ onClick, position, visible }: { onClick: () => void; position: [number, number, number]; visible: boolean }) => {
+  const [hovered, setHovered] = useState(false);
+  const groupRef = useRef<THREE.Group>(null);
+  
+  useFrame(() => {
+    if (groupRef.current) {
+      const targetScale = visible ? (hovered ? 1.1 : 1) : 0;
+      groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+    }
+  });
+
+  if (!visible) return null;
+
+  return (
+    <group ref={groupRef} position={position} scale={[0, 0, 0]}>
+      <mesh
+        onPointerOver={() => { setHovered(true); document.body.style.cursor = 'pointer'; }}
+        onPointerOut={() => { setHovered(false); document.body.style.cursor = 'auto'; }}
+        onClick={onClick}
+      >
+        <circleGeometry args={[0.6, 32]} />
+        <meshStandardMaterial color={hovered ? '#22c55e' : '#3b82f6'} />
+      </mesh>
+      <Text
+        position={[0, 0, 0.1]}
+        fontSize={0.25}
+        color="#ffffff"
+        anchorX="center"
+        anchorY="middle"
+      >
+        ←
+      </Text>
+      <Text
+        position={[0, -0.9, 0]}
+        fontSize={0.15}
+        color="#ffffff"
+        anchorX="center"
+        anchorY="middle"
+        fillOpacity={0.7}
+      >
+        Back
+      </Text>
+    </group>
+  );
+};
+
+interface FlowchartSceneProps extends SyllabusFlowchart3DProps {
+  courseId?: string;
+}
+
+const FlowchartScene = ({ courseTitle, features, theme = 'tech', courseId }: FlowchartSceneProps) => {
   const themeConfig = themes[theme];
+  const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
+  const [isZoomed, setIsZoomed] = useState(false);
+  
+  // Get syllabus details for this course
+  const syllabusDetails = courseId ? courseSyllabusDetails[courseId] || {} : {};
   
   // Calculate positions in a radial pattern around the center
   const getNodePosition = (index: number, total: number): [number, number, number] => {
@@ -114,18 +201,59 @@ const FlowchartScene = ({ courseTitle, features, theme = 'tech' }: SyllabusFlowc
     ];
   };
 
+  // Calculate sub-node positions around a selected feature
+  const getSubNodePosition = (index: number, total: number, parentPos: [number, number, number]): [number, number, number] => {
+    const radius = 2.5;
+    const startAngle = -Math.PI / 2;
+    const angleSpread = Math.PI * 1.5;
+    const angle = startAngle + (index / (total - 1 || 1)) * angleSpread;
+    return [
+      parentPos[0] + Math.cos(angle) * radius,
+      parentPos[1] + Math.sin(angle) * radius * 0.6,
+      0.5
+    ];
+  };
+
   const centerPosition: [number, number, number] = [0, 0, 0];
+  
+  // Find index and position of selected feature
+  const selectedIndex = selectedFeature ? features.indexOf(selectedFeature) : -1;
+  const selectedPosition = selectedIndex >= 0 ? getNodePosition(selectedIndex, features.length) : centerPosition;
+  
+  // Get subtopics for selected feature
+  const subtopics = selectedFeature ? syllabusDetails[selectedFeature] || [] : [];
+
+  // Camera positions
+  const defaultCameraPos: [number, number, number] = [0, 0, 14];
+  const zoomedCameraPos: [number, number, number] = [selectedPosition[0] * 0.3, selectedPosition[1] * 0.3, 8];
+  
+  const handleFeatureClick = useCallback((feature: string) => {
+    if (syllabusDetails[feature] && syllabusDetails[feature].length > 0) {
+      setSelectedFeature(feature);
+      setIsZoomed(true);
+    }
+  }, [syllabusDetails]);
+
+  const handleBack = useCallback(() => {
+    setSelectedFeature(null);
+    setIsZoomed(false);
+  }, []);
 
   return (
     <>
-      <PerspectiveCamera makeDefault position={[0, 0, 14]} fov={50} />
+      <PerspectiveCamera makeDefault position={defaultCameraPos} fov={50} />
+      <CameraController 
+        targetPosition={isZoomed ? zoomedCameraPos : defaultCameraPos}
+        targetLookAt={isZoomed ? selectedPosition : centerPosition}
+        isZoomed={isZoomed}
+      />
       <OrbitControls 
         enableZoom={true}
         enablePan={false}
-        minDistance={10}
+        minDistance={6}
         maxDistance={25}
-        autoRotate
-        autoRotateSpeed={0.4}
+        autoRotate={!isZoomed}
+        autoRotateSpeed={0.3}
         maxPolarAngle={Math.PI * 0.75}
         minPolarAngle={Math.PI * 0.25}
       />
@@ -146,6 +274,13 @@ const FlowchartScene = ({ courseTitle, features, theme = 'tech' }: SyllabusFlowc
       <FloatingOrbs color={themeConfig.accentColor} />
       <GridFloor color={themeConfig.accentColor} />
 
+      {/* Back button */}
+      <BackButton 
+        onClick={handleBack} 
+        position={[-6, 3.5, 2]} 
+        visible={isZoomed}
+      />
+
       {/* Center node - Course Title */}
       <FlowchartNode
         position={centerPosition}
@@ -153,24 +288,57 @@ const FlowchartScene = ({ courseTitle, features, theme = 'tech' }: SyllabusFlowc
         color={themeConfig.centerColor}
         delay={0}
         isCenter
+        isClickable={false}
       />
 
       {/* Feature nodes */}
       {features.map((feature, index) => {
         const position = getNodePosition(index, features.length);
+        const isSelected = feature === selectedFeature;
+        const hasSubtopics = syllabusDetails[feature] && syllabusDetails[feature].length > 0;
+        
         return (
           <group key={index}>
             <FlowchartConnection
               start={centerPosition}
               end={position}
               delay={index + 1}
+              color={isSelected ? '#22c55e' : themeConfig.accentColor}
+              animated={isSelected}
             />
             <FlowchartNode
               position={position}
               text={feature}
               color={themeConfig.nodeColors[index % themeConfig.nodeColors.length]}
               delay={index + 1}
+              onClick={() => handleFeatureClick(feature)}
+              isSelected={isSelected}
+              isClickable={hasSubtopics}
             />
+            
+            {/* Subtopics when this feature is selected */}
+            {isSelected && subtopics.map((subtopic, subIndex) => {
+              const subPosition = getSubNodePosition(subIndex, subtopics.length, position);
+              return (
+                <group key={`sub-${subIndex}`}>
+                  <FlowchartConnection
+                    start={position}
+                    end={subPosition}
+                    delay={subIndex * 0.1}
+                    color={themeConfig.accentColor}
+                    isSubConnection
+                  />
+                  <FlowchartNode
+                    position={subPosition}
+                    text={subtopic}
+                    color={themeConfig.subNodeColor}
+                    delay={subIndex * 0.1}
+                    isSubNode
+                    isClickable={false}
+                  />
+                </group>
+              );
+            })}
           </group>
         );
       })}
@@ -200,14 +368,19 @@ const SyllabusFlowchart3D = ({ courseTitle, features, courseId }: SyllabusFlowch
   const themeConfig = themes[theme];
 
   return (
-    <div className={`relative w-full h-[500px] bg-gradient-to-br ${themeConfig.background} rounded-xl overflow-hidden border border-white/10`}>
+    <div className={`relative w-full h-[550px] bg-gradient-to-br ${themeConfig.background} rounded-xl overflow-hidden border border-white/10`}>
       <Canvas gl={{ antialias: true, alpha: false }}>
         <Suspense fallback={null}>
-          <FlowchartScene courseTitle={courseTitle} features={features} theme={theme} />
+          <FlowchartScene 
+            courseTitle={courseTitle} 
+            features={features} 
+            theme={theme}
+            courseId={courseId}
+          />
         </Suspense>
       </Canvas>
       <div className="absolute bottom-4 left-4 text-sm text-white/70 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
-        🖱️ Drag to rotate • Scroll to zoom
+        🖱️ Click topic to explore • Drag to rotate • Scroll to zoom
       </div>
     </div>
   );
