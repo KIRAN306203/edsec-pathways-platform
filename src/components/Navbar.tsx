@@ -21,9 +21,8 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center space-x-3">
-            <img src={logo} alt="Edsec Innovations Logo" className="w-10 h-10 object-contain" />
-            <span className="font-bold text-xl text-foreground">Edsec Innovations</span>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="Edsec Innovations Logo" className="h-12 w-auto object-contain" />
           </Link>
 
           {/* Desktop Navigation */}
