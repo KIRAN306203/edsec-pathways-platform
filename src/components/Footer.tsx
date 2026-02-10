@@ -87,14 +87,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="opacity-90 hover:text-secondary transition-colors">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="opacity-90 hover:text-secondary transition-colors">
+                <Link to="/privacy" className="opacity-90 hover:text-secondary transition-colors">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
