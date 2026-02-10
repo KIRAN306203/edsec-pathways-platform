@@ -1,15 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Clock, Award, CheckCircle2, Loader2 } from 'lucide-react';
+import { Clock, Award, CheckCircle2 } from 'lucide-react';
 import { courses } from '@/data/courses';
-
-// Lazy load 3D component for better performance
-const SyllabusFlowchart3D = lazy(() => import('@/components/SyllabusFlowchart3D'));
 
 const CourseDetail = () => {
   const { courseId } = useParams();
@@ -56,22 +52,6 @@ const CourseDetail = () => {
               <p className="text-xl text-muted-foreground">{course.description}</p>
             </div>
 
-            {/* 3D Syllabus Flowchart */}
-            <Card className="mb-8 overflow-hidden">
-              <CardContent className="pt-6">
-                <h2 className="text-2xl font-bold mb-4">Interactive Syllabus Overview</h2>
-                <Suspense fallback={
-                  <div className="w-full h-[500px] flex items-center justify-center bg-muted rounded-xl">
-                    <div className="flex flex-col items-center gap-2">
-                      <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                      <span className="text-muted-foreground">Loading 3D visualization...</span>
-                    </div>
-                  </div>
-                }>
-                  <SyllabusFlowchart3D courseTitle={course.title} features={course.features} courseId={course.id} />
-                </Suspense>
-              </CardContent>
-            </Card>
 
             {/* Course Description */}
             {course.detailedDescription && (

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from './ui/button';
-import logo from '@/assets/edsec-logo.png';
+import logo from '@/assets/edsec-logo-full.jpeg';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +22,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="Edsec Innovations Logo" className="h-12 w-auto object-contain" />
+            <img src={logo} alt="Edsec Innovations Logo" className="h-14 w-auto object-contain" />
           </Link>
 
           {/* Desktop Navigation */}
