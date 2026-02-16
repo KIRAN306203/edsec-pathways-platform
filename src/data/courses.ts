@@ -8,15 +8,6 @@ import msOffice from '@/assets/courses/ms-office.jpg';
 import digitalMarketingNew from '@/assets/courses/digital-marketing-new.jpg';
 import sqlLanguage from '@/assets/courses/sql-language.jpg';
 
-// Download brochures
-import dataScienceBrochure from '@/assets/downloads/data-science-brochure.png';
-import dataAnalyticsBrochure from '@/assets/downloads/data-analytics-brochure.png';
-import pythonSqlBrochure from '@/assets/downloads/python-sql-brochure.png';
-import fullStackBrochure from '@/assets/downloads/full-stack-brochure.png';
-import webDevBrochure from '@/assets/downloads/web-development-brochure.png';
-import valueAddedBrochure from '@/assets/downloads/value-added-courses-brochure.png';
-import internshipBrochure from '@/assets/downloads/internship-program-brochure.png';
-
 export interface Course {
   id: string;
   title: string;
@@ -27,7 +18,8 @@ export interface Course {
   category: 'main' | 'value-added';
   detailedDescription?: string;
   image: string;
-  downloadImages?: { url: string; filename: string }[];
+  downloadBrochure?: { url: string; filename: string };
+  skills?: string[];
 }
 
 export const courses: Course[] = [
@@ -43,12 +35,11 @@ export const courses: Course[] = [
       'Statistics',
       'Real-World Data Project'
     ],
+    skills: ['Python', 'Machine Learning', 'Statistics', 'Data Visualization', 'Pandas', 'NumPy'],
     category: 'main',
     detailedDescription: 'Dive deep into the world of data science with our comprehensive internship program. Learn Python, machine learning algorithms, data visualization techniques, and statistical analysis. Work on real-world datasets and complete a capstone project that demonstrates your skills to potential employers.',
     image: dataScience,
-    downloadImages: [
-      { url: dataScienceBrochure, filename: 'EDSEC-Data-Science-Brochure.png' }
-    ]
+    downloadBrochure: { url: './brochures/data-science-brochure.pdf', filename: 'EDSEC-Data-Science-Brochure.pdf' }
   },
   {
     id: 'data-analytics',
@@ -63,12 +54,11 @@ export const courses: Course[] = [
       'Business Dashboarding',
       'Real Data Insights Project'
     ],
+    skills: ['Excel', 'Power BI', 'SQL', 'Data Analysis', 'Business Intelligence'],
     category: 'main',
     detailedDescription: 'Become a data analytics expert through hands-on training in Excel, Power BI, SQL, and business intelligence. Learn to create stunning dashboards, perform complex data analysis, and communicate insights effectively. Complete real business case studies and build a professional portfolio.',
     image: dataAnalytics,
-    downloadImages: [
-      { url: dataAnalyticsBrochure, filename: 'EDSEC-Data-Analytics-Brochure.png' }
-    ]
+    downloadBrochure: { url: './brochures/data-analytics-brochure.pdf', filename: 'EDSEC-Data-Analytics-Brochure.pdf' }
   },
   {
     id: 'python-sql',
@@ -82,12 +72,11 @@ export const courses: Course[] = [
       'API Handling',
       'Mini Project'
     ],
+    skills: ['Python', 'SQL', 'API Development', 'Database Management'],
     category: 'main',
     detailedDescription: 'Master Python programming from basics to advanced concepts and integrate it with SQL for powerful data manipulation. Learn to build APIs, work with databases, and develop complete applications. Includes hands-on projects and real-world problem-solving.',
     image: pythonSql,
-    downloadImages: [
-      { url: pythonSqlBrochure, filename: 'EDSEC-Python-SQL-Brochure.png' }
-    ]
+    downloadBrochure: { url: './brochures/python-sql-brochure.pdf', filename: 'EDSEC-Python-SQL-Brochure.pdf' }
   },
   {
     id: 'full-stack',
@@ -103,12 +92,11 @@ export const courses: Course[] = [
       'Cloud Hosting',
       'Capstone Full-Stack Project'
     ],
+    skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Django', 'Database', 'Cloud'],
     category: 'main',
     detailedDescription: 'Comprehensive full-stack development training covering both frontend and backend technologies. Learn React for dynamic user interfaces, Django for robust backends, database design, and cloud deployment. Build multiple projects including a complete full-stack application.',
     image: fullStack,
-    downloadImages: [
-      { url: fullStackBrochure, filename: 'EDSEC-Full-Stack-Development-Brochure.png' }
-    ]
+    downloadBrochure: { url: './brochures/full-stack-brochure.pdf', filename: 'EDSEC-Full-Stack-Development-Brochure.pdf' }
   },
   {
     id: 'web-development',
@@ -122,12 +110,11 @@ export const courses: Course[] = [
       'Hosting Basics',
       'Portfolio Project'
     ],
+    skills: ['HTML', 'CSS', 'JavaScript', 'Responsive Design', 'Web Hosting'],
     category: 'main',
     detailedDescription: 'Learn professional web development from the ground up. Master HTML, CSS, JavaScript, and modern design principles. Create responsive, mobile-friendly websites and deploy them to the web. Build a stunning portfolio to showcase your work.',
     image: webDev,
-    downloadImages: [
-      { url: webDevBrochure, filename: 'EDSEC-Web-Development-Brochure.png' }
-    ]
+    downloadBrochure: { url: './brochures/web-development-brochure.pdf', filename: 'EDSEC-Web-Development-Brochure.pdf' }
   },
   {
     id: 'python-basics',
@@ -143,12 +130,10 @@ export const courses: Course[] = [
       'Comments & indentation',
       'Operators (Arithmetic, Comparison, Logical, Assignment, Bitwise)'
     ],
+    skills: ['Python', 'Programming Basics'],
     category: 'value-added',
     detailedDescription: 'Perfect introduction to Python for absolute beginners. Learn programming fundamentals, write your first programs, and understand core Python concepts in just one month.',
-    image: pythonBasics,
-    downloadImages: [
-      { url: valueAddedBrochure, filename: 'EDSEC-Value-Added-Courses-Brochure.png' }
-    ]
+    image: pythonBasics
   },
   {
     id: 'augmented-reality',
@@ -162,12 +147,10 @@ export const courses: Course[] = [
       'Improve performance of AR apps',
       'Integrate animations & UI'
     ],
+    skills: ['AR Development', '3D Modeling', 'Animation'],
     category: 'value-added',
     detailedDescription: 'Step into the future with Augmented Reality development. Learn to create interactive AR experiences, track real-world objects, and build engaging applications that blend digital content with the physical world.',
-    image: msOffice,
-    downloadImages: [
-      { url: valueAddedBrochure, filename: 'EDSEC-Value-Added-Courses-Brochure.png' }
-    ]
+    image: msOffice
   },
   {
     id: 'sql-language',
@@ -181,12 +164,10 @@ export const courses: Course[] = [
       'Data manipulation',
       'Database design'
     ],
+    skills: ['SQL', 'Database Design', 'Data Management'],
     category: 'value-added',
     detailedDescription: 'Learn SQL from scratch and become proficient in database management. Master queries, joins, aggregations, and database design. Essential skill for any developer or data professional.',
-    image: sqlLanguage,
-    downloadImages: [
-      { url: valueAddedBrochure, filename: 'EDSEC-Value-Added-Courses-Brochure.png' }
-    ]
+    image: sqlLanguage
   },
   {
     id: 'digital-marketing',
@@ -201,11 +182,9 @@ export const courses: Course[] = [
       'Google Ads & Facebook Ads',
       'Analytics & Performance Tracking'
     ],
+    skills: ['SEO', 'Social Media', 'Google Ads', 'Email Marketing', 'Analytics'],
     category: 'value-added',
     detailedDescription: 'Master the fundamentals of digital marketing in just one month. Learn to create effective social media campaigns, optimize content for search engines, run successful email marketing, and analyze campaign performance. Perfect for entrepreneurs and marketing enthusiasts.',
-    image: digitalMarketingNew,
-    downloadImages: [
-      { url: valueAddedBrochure, filename: 'EDSEC-Value-Added-Courses-Brochure.png' }
-    ]
+    image: digitalMarketingNew
   }
 ];

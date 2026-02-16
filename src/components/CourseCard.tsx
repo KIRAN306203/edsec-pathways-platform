@@ -3,23 +3,22 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from './ui/button';
 import { Clock, Award, Download } from 'lucide-react';
 import { Course } from '@/data/courses';
-import { downloadImages } from '@/services/api';
 
 interface CourseCardProps {
   course: Course;
 }
 
 const CourseCard = ({ course }: CourseCardProps) => {
-  const handleDownload = async () => {
-    if (!course.downloadImages || course.downloadImages.length === 0) {
-      return;
-    }
+  const handleDownload = () => {
+    if (!course.downloadBrochure) return;
     
-    try {
-      await downloadImages(course.downloadImages);
-    } catch (error) {
-      console.error('Download failed:', error);
-    }
+    const link = document.createElement('a');
+    link.href = course.downloadBrochure.url;
+    link.download = course.downloadBrochure.filename;
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -28,6 +27,7 @@ const CourseCard = ({ course }: CourseCardProps) => {
         <img 
           src={course.image} 
           alt={course.title}
+          loading="lazy"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
       </div>
@@ -64,13 +64,13 @@ const CourseCard = ({ course }: CourseCardProps) => {
             View Details
           </Button>
         </Link>
-        {course.downloadImages && course.downloadImages.length > 0 && (
+        {course.downloadBrochure && (
           <Button 
             variant="outline" 
             size="icon"
             onClick={handleDownload}
             className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-            title="Download Brochure"
+            title="Download Brochure (PDF)"
           >
             <Download className="h-4 w-4" />
           </Button>
