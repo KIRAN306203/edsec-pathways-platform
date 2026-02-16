@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, CheckCircle2 } from 'lucide-react';
+import { Search, CheckCircle2, ArrowRight, BarChart3 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import PromoBanner from '@/components/PromoBanner';
+import FAQSection from '@/components/FAQSection';
 import CourseCard from '@/components/CourseCard';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -28,6 +30,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <PromoBanner />
       <Navbar />
       
       {/* Hero Section */}
@@ -42,7 +45,7 @@ const Index = () => {
               Empowering Students Through Certified Internships and Real-World Projects
             </h1>
             
-            {/* Search Bar integrated in hero */}
+            {/* Search Bar */}
             <div className="max-w-2xl mx-auto mb-8">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
@@ -60,9 +63,9 @@ const Index = () => {
               Join India's leading MSME certified training institute for hands-on learning and career transformation
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/internship">
+              <Link to="/enroll">
                 <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                  Internship Programs
+                  Enroll Now — Batches from 1st March
                 </Button>
               </Link>
               <Link to="/contact">
@@ -97,10 +100,15 @@ const Index = () => {
             </div>
           )}
 
-          <div className="text-center mt-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
             <Link to="/internship">
               <Button size="lg" className="bg-gradient-primary hover:opacity-90">
-                View Internship Programs
+                View Internship Programs <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Link to="/compare">
+              <Button size="lg" variant="outline">
+                <BarChart3 className="mr-2 h-4 w-4" /> Compare Courses
               </Button>
             </Link>
           </div>
@@ -126,6 +134,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FAQSection />
 
       <Footer />
       <WhatsAppButton />
